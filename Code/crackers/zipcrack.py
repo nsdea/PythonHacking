@@ -31,7 +31,7 @@ def crackzip(password: Queue, tid: int) -> None:
             with zipfile.ZipFile("main.zip", "r") as zfile:
                 # try to extract
                 zfile.extractall(pwd=passwd.encode())
-                # found password if sucess
+                # found password if success
                 found.insert(0, True), found.insert(1, passwd)
                 exit()
         except Exception as error:
