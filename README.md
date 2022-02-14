@@ -4,7 +4,7 @@
 - My [Social Medias](https://youtu.be/iik25wqIuFo)
 
 
-```
+```py
 import socket
 import queue
 import os
