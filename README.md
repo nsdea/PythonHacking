@@ -6,6 +6,7 @@
 
 often used:
 ```py
+from colorama import Fore, Style, init
 from threading import Thread
 import requests
 import socket
