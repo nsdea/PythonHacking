@@ -22,7 +22,7 @@ portdb = {
 
 
 # formated print 
-def formated_print(host: str,ports: Queue) -> None:
+def formated_print(host: str, ports: Queue) -> None:
     # clear terminal
     os.system(cmd)
     # info
