@@ -12,7 +12,7 @@ cmd = "cls"
 init()
 # port "db" :rofl:  
 portdb = {
-    22 : "ftp",
+    21 : "ftp",
     22 : "ssh",
     25 : "some tcp service",
     80 : "http",
