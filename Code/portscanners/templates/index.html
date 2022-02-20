@@ -1,0 +1,26 @@
+{% include "begin.html" %}
+<form action="" method="get">
+    <p><strong>Use this tool to start a port scan:</strong></p>
+
+    <p>
+        <label>IP</label><br>
+        <input type="text" name="host" required="">
+    </p>
+    <p>
+        <label>Amount of ports to scan</label><br>
+        <input type="number" name="port" required="" min="1" max="65535">
+    </p>
+    <p>
+        <label>Threads</label><br>
+        <input type="number" name="threads" value="3" required="" min="1" max="3">
+    </p>
+    <p>
+        <label>Timeout in milliseconds</label><br>
+        <input type="number" name="timeout" value="700" required="" min="50" max="5000">
+    </p>
+
+    <button>Start</button>
+    <p>Depending on your settings, it can take seconds to minutes to process the portscan.</p>
+    </form>
+
+{% include "end.html" %}

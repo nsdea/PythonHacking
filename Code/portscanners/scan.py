@@ -19,23 +19,6 @@ portdb = {
     443: "http",
     445: "smtp"
 }
-
-
-# formated print 
-def formatted_print(host: str, ports: Queue) -> None:
-    # clear terminal
-    os.system(cmd)
-    # info
-    print("Result ({}): \n {}".format(host, "-" * 50))
-    # print ports formated
-    while not ports.empty():
-        # get port from queue
-        port = ports.get()
-        # print formated
-        print("{}[info]{} Port: {}{} - {}{} is open !!!".format(
-            Fore.LIGHTRED_EX, Style.RESET_ALL,
-            Fore.LIGHTGREEN_EX, port, portdb[port], Style.RESET_ALL,
-        ))
         
 # scanner function
 def scanport(host: str, ports: Queue, result: Queue, timeout: float, tid: int):
@@ -58,29 +41,28 @@ def scanport(host: str, ports: Queue, result: Queue, timeout: float, tid: int):
                 result.put(port)
                 
 # argumet parser
-def parsearguments():
-    if len(sys.argv) < 5:
-        print("Usage: {} <host> <port> <threads> <timeout>".format(sys.argv[0]))
-        exit(1)
-    host, port =  sys.argv[1], int(sys.argv[2])
-    runs, timeout = int(sys.argv[3]), float(sys.argv[4]) 
-    return host, port, runs, timeout
+# def parsearguments():
+#     if len(sys.argv) < 5:
+#         print("Usage: {} <host> <port> <threads> <timeout>".format(sys.argv[0]))
+#         exit(1)
+#     host, port =  sys.argv[1], int(sys.argv[2])
+#     runs, timeout = int(sys.argv[3]), float(sys.argv[4]) 
+#     return host, port, runs, timeout
 
 
 # run portscanner
-def run():
+def run(host: str, port: int, runs: int, timeout: float):
     # values to run 
-    host, port, runs, timeout = parsearguments()
     # result ports to scan queue
     result = Queue()
     ports = Queue()
     # initialize the queue 
-    for p in range(1, port + 1):
+    for p in range(1, int(port) + 1):
         ports.put(p)
     # workers - list of running threads
     workers = []
     # start threads
-    for i in range(runs):
+    for i in range(int(runs)):
         t = Thread(target=scanport, args=(host, ports, result, timeout, i))
         t.start()
         workers.append(t)
@@ -95,8 +77,21 @@ def run():
     # sleep a moment
     time.sleep(0.3)
     # formated print
-    formated_print(host, result)
-    
+    #     
+    os.system(cmd)
+    # info
+    print("Result ({}): \n {}".format(host, "-" * 50))
+    # print ports formated
+
+    output = []
+
+    while not ports.empty():
+        # get port from queue
+        port = ports.get()
+        # print formated
+        output.append({'port': port, 'name': portdb[port]})
+
+    return output
 
 if __name__=="__main__":
     run()
